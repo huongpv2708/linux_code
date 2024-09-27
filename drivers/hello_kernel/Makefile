@@ -1,0 +1,1 @@
+hello-objs			:= hello.o
