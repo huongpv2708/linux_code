@@ -477,3 +477,24 @@ i2c_csi_dsi0: &i2c0 {
 		eth_led1 = <&phy1>,"led-modes:4";
 	};
 };
+
+
+&gpio {
+    blink_led_pin: blink_led_pin {
+        brcm,pins = <4>;            // GPIO pin 4
+        brcm,function = <1>;         // Function 1 means output mode
+        brcm,pull = <0>;             // No pull-up or pull-down resistor
+        label = "blink_led";         // Optional label for identification
+    };
+};
+
+&leds {
+    compatible = "gpio-leds";
+    
+    blink_led {
+        label = "Blink LED";
+        gpios = <&gpio 4 GPIO_ACTIVE_HIGH>;  // GPIO 4 active high
+        default-state = "on";                // Initially, LED is on
+        linux,default-trigger = "none";      // No default trigger, manually controlled
+    };
+};
